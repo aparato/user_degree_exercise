@@ -1,7 +1,7 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 import { UserService } from "../services/user-service";
 
-export default async function(fastify: FastifyInstance) {
+export default async function (fastify: FastifyInstance) {
   const userService = new UserService();
 
   // Preload data necessary for these routes
@@ -49,7 +49,7 @@ export default async function(fastify: FastifyInstance) {
       const userData = request.body;
       const user = userService.updateUser(parseInt(userId), userData);
 
-      if(user) {
+      if (user) {
         reply.send(user);
       } else {
         reply.code(404).send(`No user with id ${userId} exists in system`);
@@ -72,7 +72,7 @@ export default async function(fastify: FastifyInstance) {
       return degrees > 0 ? degrees : "No relationship found";
     }
   });
-  
+
   fastify.delete("/delete/:userId", {
     handler: async (
       request: FastifyRequest<{
